@@ -30,7 +30,14 @@ export class TodoListComponent implements OnInit {
 
     this.form = this.fb.group({
       id: [''],
-      description: ['', Validators.required],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(50),
+        ],
+      ],
       done: [false],
     });
 
@@ -41,6 +48,13 @@ export class TodoListComponent implements OnInit {
       } else if (val == 'N') {
         this.todos = this.todos.filter((todo) => !todo.done);
       }
+    });
+
+    this.filterForm.get('search').valueChanges.subscribe((val) => {
+      this.fetchData();
+      this.todos = this.todos.filter((todo) =>
+        todo.description.toLowerCase().includes(val.toLowerCase())
+      );
     });
   }
 
