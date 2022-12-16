@@ -18,6 +18,14 @@
         placeholder="Enter description"
         type="text"
       />
+      <span
+        class="validation-error"
+        *ngIf="
+          (form.get('description').dirty || form.get('description').touched) &&
+          form.get('description').hasError('required')
+        "
+        >Field required</span
+      >
     </fieldset>
     <fieldset class="col-md-2">
       <label class="form-check-label">Done?</label>
