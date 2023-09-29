@@ -7,7 +7,12 @@ import { TodoListInterface } from '../types/todo-list.interface';
 export class TodoListService {
   todos: TodoListInterface = todoList;
   private add(item: TodoItemInterface): void {
-    const newId = +this.todos.items[this.todos.items.length - 1].id + 1;
+    let newId;
+    if (this.todos.items.length) {
+      newId = +this.todos.items[this.todos.items.length - 1].id + 1;
+    } else {
+      newId = Math.floor(Math.random() * 1000).toString();
+    }
     this.todos.items.push({
       ...item,
       id: newId,

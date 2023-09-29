@@ -73,10 +73,6 @@ export class TodoListComponent implements OnInit {
     this.clearForm();
   }
 
-  onAdd(): void {
-    this.clearForm();
-  }
-
   onRemove(id: number): void {
     this.todoListService.remove(id);
     this.fetchData();
@@ -94,8 +90,6 @@ export class TodoListComponent implements OnInit {
   }
 
   clearForm(): void {
-    this.form.patchValue({ id: '' });
-    this.form.patchValue({ description: '' });
-    this.form.patchValue({ done: false });
+    this.form.reset();
   }
 }
